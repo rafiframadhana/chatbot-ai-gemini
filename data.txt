@@ -1,0 +1,93 @@
+Personal Information:
+
+Name: Rafif Ramadhana
+
+Location: Aceh, Indonesia
+
+Mobile: +6281292545497
+
+Email: rafiframadhana.cs@gmail.com
+
+LinkedIn: https://www.linkedin.com/in/rafif-ramadhana-230603250/
+
+GitHub: https://github.com/rafiframadhana
+
+Profile Summary: Recent Bachelor of Science in Computer Science graduate from the University of Lucknow, with a strong foundation in web development, JavaScript frameworks, and AI integration. Skilled in React, Next.js, and Tailwind CSS, with experience in building responsive web applications, e-commerce platforms, and AI-powered projects. Proficient in REST API integration, state management, testing, and deployment using Git, Vercel, and Netlify. Have a foundational understanding of backend technologies, including Node.js, Express.js, and SQL databases. Certified in JavaScript, CSS, SQL, and responsive web design from freeCodeCamp and HackerRank. Passionate about software engineering and creating scalable, user-friendly applications, with a strong ability to collaborate effectively with teams and quickly adapt to new technologies.
+
+Education:
+
+Degree: Bachelor of Science in Computer Science
+
+University: University of Lucknow, India
+
+Scholarship: ICCR Scholarship Program
+
+Capstone Project: Developed an e-commerce website with interactive features.
+
+Skills:
+
+Programming Languages: JavaScript (ES6+), TypeScript, HTML, CSS
+
+Frontend Technologies: React.js, Next.js, Tailwind CSS, Redux Toolkit, Zustand, React Router, Material UI, Chakra UI
+
+Backend Technologies: Node.js, Express.js, SQL (MySQL)
+
+Deployment & Tools: Vercel, Netlify, GitHub Pages, ESLint, Prettier, npm, VS Code
+
+Version Control: Git, GitHub
+
+AI Integration: Experience in incorporating AI solutions into projects
+
+Testing: Jasmine for unit testing
+
+Certifications:
+
+Frontend Developer (React) – HackerRank
+
+React Certificate – HackerRank
+
+JavaScript Algorithms and Data Structures – freeCodeCamp
+
+Responsive Web Design – freeCodeCamp
+
+JavaScript Certificate – HackerRank
+
+CSS Certificate – HackerRank
+
+SQL Certificate – HackerRank
+
+Projects:
+
+AI Recipe Generator (Powered by Mistral AI): React.js app that generates recipes based on user-provided ingredients using Mistral AI.
+
+Coffee Shop (E-commerce website): Full-stack website built using React.js for frontend and Express.js for backend.
+
+Clothing Store (E-commerce platform): React.js-based website with state management and payment features.
+
+E-commerce (Amazon Clone): Fully responsive e-commerce platform with product listings, cart, and order management.
+
+Portfolio Website: Personal website to showcase skills and projects.
+
+Web Applications & Games: Interactive apps and games, such as Weather App, To-do List, Calculator, Rock-Paper-Scissors, etc.
+
+Leadership & Volunteering:
+
+Leader, Indonesian Student Association (Lucknow Chapter): Led cultural events and networking meetups.
+
+International Student Delegate, G20 Summit (Kashmir & Lucknow): Represented Indonesian students, participated in workshops, and advocated for international cooperation.
+
+Languages:
+
+English: Fluent
+
+Indonesian: Native
+
+Interests:
+
+Web Development: Passion for building user-friendly, dynamic websites and apps.
+
+Artificial Intelligence: Exploring AI integration in software development.
+
+Technology & Innovation: Staying updated with emerging trends in software development and tech.
+
+Open Source & Collaboration: Engaging with developer communities and contributing to projects.
