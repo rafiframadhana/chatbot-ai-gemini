@@ -49,6 +49,7 @@ const ChatInterface = () => {
   };
 
   const suggestedMessages = [
+    "Tell me about yourself.",
     "Tell me about your skills.",
     "What projects have you worked on?",
     "What are your interests?",
@@ -56,8 +57,26 @@ const ChatInterface = () => {
     "What is your work experience?",
   ];
 
-  const handleSuggestedMessageClick = (message: string) => {
-    setInput(message);
+  const handleSuggestedMessageClick = async (message: string) => {
+    const userMessage: ChatMessage = { role: "user", content: message };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setIsLoading(true);
+
+    try {
+      const aiResponse = await askQuestion({ question: message });
+      const aiMessage: ChatMessage = { role: "assistant", content: aiResponse.answer };
+      setMessages((prevMessages) => [...prevMessages, aiMessage]);
+    } catch (error) {
+      console.error("Failed to get AI response:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to get AI response.",
+      });
+    } finally {
+      setIsLoading(false);
+      setInput("");
+    }
   };
 
   const scrollSuggestedMessages = (direction: "left" | "right") => {
@@ -109,13 +128,12 @@ const ChatInterface = () => {
             {/* Header */}
             <div className="border-b border-gray-700 p-4 flex items-center justify-between bg-zinc-900">
               {/* Left: Avatar + Name */}
-              <div className="flex items-center space-x-4">
-                <Avatar>
+              <div className="flex items-center space-x-4">                  <Avatar>
                   <AvatarImage
-                    src="https://picsum.photos/50/50"
-                    alt="AI Chatbot"
+                    src="https://avatars.githubusercontent.com/rafiframadhana"
+                    alt="Rafif Ramadhana"
                   />
-                  <AvatarFallback>AI</AvatarFallback>
+                  <AvatarFallback>RR</AvatarFallback>
                 </Avatar>
                 <div>
                   <h5 className="font-semibold">Apip</h5>
@@ -132,28 +150,56 @@ const ChatInterface = () => {
               >
                 Reset
               </Button>
-            </div>
-
-            {/* Chat Messages */}
+            </div>            {/* Chat Messages */}
             <ScrollArea
               ref={chatWindowRef}
-              className="flex-grow p-4 space-y-2 bg-black overflow-y-auto scrollbar-hide"
+              className="flex-grow px-4 pt-4 space-y-4 bg-black overflow-y-auto scrollbar-hide"
             >
               {messages.map((message, index) => (
                 <div
                   key={index}
                   className={`flex ${
-                    message.role === "user" ? "justify-start" : "justify-end"
-                  }`}
-                >
-                  <div
-                    className={`px-4 py-2 max-w-[80%] bottom-left- rounded-xl shadow-md mb-4 ${
+                    message.role === "user" ? "justify-end" : "justify-start"
+                  } items-start`}
+                >                  <div
+                    className={`px-6 py-4 max-w-[85%] rounded-xl shadow-md mb-4 ${
                       message.role === "user"
-                        ? "bg-blue-600 hyphens-auto rounded-[20px] rounded-r-[20px] rounded-l  only:rounded-[20px] last:rounded-tl first:rounded-tl-[20px] first:rounded-bl only:rounded-bl last:rounded-bl-[20px]"
-                        : "bg-gray-800 hyphens-auto rounded-[20px] px-1 py-4 rounded-r last:rounded-tr first:rounded-tr-[20px] only:rounded-tr-[20px] first:rounded-br only:rounded-br last:rounded-br-[20px]"
+                        ? "bg-blue-600 text-white rounded-[20px]"
+                        : "bg-gray-800 text-white rounded-[20px]"
                     }`}
-                  >
-                    <ReactMarkdown>{message.content}</ReactMarkdown>
+                  >                    <div className="markdown-message text-sm leading-relaxed">
+                      <ReactMarkdown
+                        components={{
+                          p: ({node, ...props}) => {
+                            const content = props.children?.toString()?.trim();
+                            if (!content) return null;
+                            return <p className="mb-3 last:mb-0" {...props} />;
+                          },
+                          ul: ({node, ...props}) => (
+                            <ul className="mb-3" {...props} />
+                          ),
+                          li: ({node, children, ...props}) => (
+                            <li className="flex items-start gap-2 mb-1" {...props}>
+                              <span className="select-none mt-[2px]">•</span>
+                              <span>{children}</span>
+                            </li>
+                          ),
+                          h2: ({node, ...props}) => (
+                            <h2 className="text-[14px] font-semibold" {...props} />
+                          ),
+                          h3: ({node, ...props}) => (
+                            <h3 className="text-[14px]" {...props} />
+                          )
+                        }}
+                      >
+                        {(message.content || '')
+                          .trim()
+                          .replace(/\n{3,}/g, '\n\n')
+                          .replace(/\n\s+/g, '\n')
+                          .replace(/^[-*]\s/gm, '• ')
+                        }
+                      </ReactMarkdown>
+                    </div>
                   </div>
                 </div>
               ))}

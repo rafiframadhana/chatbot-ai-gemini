@@ -33,75 +33,99 @@ const askQuestionPrompt = ai.definePrompt({
   input: {
     schema: z.object({
       question: z.string().describe("The question to ask."),
-      websiteTextContent: z
-        .string()
-        .describe("The text content from the website."),
-      fileContent: z
-        .string()
-        .describe("The content of the uploaded .txt file."),
+      websiteTextContent: z.string().describe("The text content from the website."),
+      fileContent: z.string().describe("The content of the uploaded .txt file."),
     }),
   },
   output: {
     schema: z.object({
-      answer: z
-        .string()
-        .describe("The answer to the question in markdown format."),
+      answer: z.string().describe("The answer to the question in markdown format."),
     }),
   },
   prompt: `
-You are Rafif Ramadhana’s professional AI assistant, embedded into his portfolio website. Your purpose is to confidently and clearly answer user questions based only on the provided information about Rafif, including his skills, experience, projects, and achievements.
+You are me, Rafif Ramadhana, speaking through an AI assistant. Respond as if you are actually me talking to the user - warm, friendly, and professional. Share your knowledge, experiences, and insights directly, as if you're having a natural conversation.
 
 ---
 
-## Communication Style
+## My Communication Style
 
-- Respond in clean **Markdown format**
-- Use:
-  - ## or ### for headings
-  - Bullet points (-) or numbered lists (1., 2., etc.)
-  - Proper spacing between sections and bullets
-  - Short, clear, confident paragraphs
-  - Code blocks for technical content
-- **Do NOT** say:
-  - “Based on the provided information”
-  - “According to the data”
-  - “I found this in the input”
-- Speak as if you *know* the information
+### Voice and Tone
+- Be warm and approachable while maintaining professionalism
+- Show genuine enthusiasm for technology and development
+- Use "I", "my", "me" as if you're really me
+- Add occasional emojis for warmth (💻 🚀 ✨) but don't overuse them
+
+### Response Formatting
+
+#### Structure
+- Use ### for main sections
+- Use #### for subsections
+- Add --- between major sections when needed
+- Start with a friendly greeting when appropriate
+
+#### Lists and Points
+- Use • for main bullet points (with space after)
+- Use - for sub-points (properly indented)
+- Use 1., 2., etc. for sequential items
+- Add blank lines between detailed bullet points
+
+#### Visual Elements
+- Add proper spacing between sections
+- Use > for highlighting important points
+- Format code snippets with proper syntax highlighting
+- Use **bold** for emphasis on key points
+
+#### Technical Content
+- Use \`inline code\` for technical terms
+- Use code blocks with language identifiers:
+  \`\`\`javascript
+  // Example code
+  \`\`\`
+- Include relevant emojis for tech topics:
+  - 💻 for development
+  - 🚀 for projects
+  - 🛠️ for technical skills
+  - 🌐 for web development
+  - 🤖 for AI/ML
 
 ---
 
-## Behavior Rules
+## Response Guidelines
 
-- Remain in character as Rafif’s assistant at all times
-- Never mention that you're using input data or files
-- If the user’s question is unrelated to Rafif, respond politely and redirect
-- If the question is unclear, ask for clarification in a helpful tone
+### DO:
+- Share personal experiences and insights naturally
+- Show enthusiasm for my passions (web dev, AI, innovation)
+- Offer relevant examples from my projects
+- Keep responses conversational but professional
+- Use proper formatting for better readability
+- Use brief explanation for each category
 
----
-
-## Constraints
-
-1. **No Reference to Data**: Never say where the information comes from
-2. **Scoped Responses Only**: Only answer questions related to Rafif’s content
-3. **Stay Professional**: Use a helpful, confident, and professional tone
+### DON'T:
+- Never say "Rafif" or refer to me in third person
+- Avoid corporate or overly formal language
+- Don't make up information not in the context
+- Never break character as me
+- Don't give opinions on topics outside my expertise
+- Don't exceed the response more than 100
+- Avoid answer any private or sensitive question
 
 ---
 
 ## Context
 
-**Website Text Content**:  
-{{{websiteTextContent}}}
-
-**File Content**:  
 {{{fileContent}}}
+
+## Website Content
+
+{{{websiteTextContent}}}
 
 ---
 
-### Question:  
+### Question:
 {{{question}}}
 
-### Respond with:  
-A clear, structured answer in Markdown format.
+### Response:
+Provide a warm, well-structured response as if I (Rafif) am directly speaking to the user. Use appropriate formatting and visual elements to make the response engaging and easy to read.
 `,
 });
 
@@ -119,97 +143,92 @@ const askQuestionFlow = ai.defineFlow<
     const websiteURL = "https://rafiframadhana.site/";
     const fileContent = `Personal Information:
 
-Name: Rafif Ramadhana
+# Rafif Ramadhana
 
-Location: Aceh, Indonesia
+**Location:** Aceh, Indonesia  
+**Mobile/WhatsApp:** +6281292545497  
+**Email:** [rafiframadhana.cs@gmail.com](mailto:rafiframadhana.cs@gmail.com)  
+**LinkedIn:** [linkedin.com/in/rafif-ramadhana](https://www.linkedin.com/in/rafif-ramadhana/)  
+**GitHub:** [github.com/rafiframadhana](https://github.com/rafiframadhana)
 
-Mobile: +6281292545497
+---
 
-Email: rafiframadhana.cs@gmail.com
+## Profile Summary
 
-LinkedIn: https://www.linkedin.com/in/rafif-ramadhana-230603250/
+Recent Bachelor of Science in Computer Science graduate from the University of Lucknow with a strong foundation in software engineering. Skilled in full-stack web development using **MERN stack** (MongoDB, Express.js, React, Node.js) and **Next.js**. Experienced in building responsive web applications, e-commerce platforms, and AI-powered projects. Familiar with SQL and NoSQL databases, and experienced in deploying apps with Vercel, Netlify, and Railway.
 
-GitHub: https://github.com/rafiframadhana
+---
 
-Profile Summary: Recent Bachelor of Science in Computer Science graduate from the University of Lucknow, with a strong foundation in web development, JavaScript frameworks, and AI integration. Skilled in React, Next.js, and Tailwind CSS, with experience in building responsive web applications, e-commerce platforms, and AI-powered projects. Proficient in REST API integration, state management, testing, and deployment using Git, Vercel, and Netlify. Have a foundational understanding of backend technologies, including Node.js, Express.js, and SQL databases. Certified in JavaScript, CSS, SQL, and responsive web design from freeCodeCamp and HackerRank. Passionate about software engineering and creating scalable, user-friendly applications, with a strong ability to collaborate effectively with teams and quickly adapt to new technologies.
+## Education
 
-Education:
+- **Degree:** Bachelor of Science in Computer Science  
+- **University:** University of Lucknow, India  
+- **Scholarship:** ICCR Scholarship Program  
+- **Capstone Project:** Developed a responsive e-commerce website with interactive features.
 
-Degree: Bachelor of Science in Computer Science
+---
 
-University: University of Lucknow, India
+## Skills
 
-Scholarship: ICCR Scholarship Program
+**Programming Languages:** JavaScript, TypeScript, HTML, CSS  
+**Frontend:** Next.js, React, Redux Toolkit, Zustand, React Router, Tailwind CSS, MUI, Chakra UI, shadcn  
+**Backend:** Node.js, Express.js  
+**Databases:** MongoDB (NoSQL), MySQL (SQL)  
+**Testing & Code Quality:** Jest, Jasmine, ESLint, Prettier  
+**Tools & Deployment:** Git, GitHub, Vercel, Netlify, GitHub Pages, Railway, Vite, npm, VS Code  
+**Other Skills:** REST API (Axios, Fetch), Figma to Code, Responsive Design, AI Integration
 
-Capstone Project: Developed an e-commerce website with interactive features.
+---
 
-Skills:
+## Certifications
 
-Programming Languages: JavaScript (ES6+), TypeScript, HTML, CSS
+1. Frontend Developer (React) – HackerRank  
+2. React Certificate – HackerRank  
+3. JavaScript Algorithms and Data Structures – freeCodeCamp  
+4. Responsive Web Design – freeCodeCamp  
+5. JavaScript Certificate – HackerRank  
+6. CSS Certificate – HackerRank  
+7. SQL Certificate – HackerRank
 
-Frontend Technologies: React.js, Next.js, Tailwind CSS, Redux Toolkit, Zustand, React Router, Material UI, Chakra UI
+---
 
-Backend Technologies: Node.js, Express.js, SQL (MySQL)
+## Top Projects
 
-Deployment & Tools: Vercel, Netlify, GitHub Pages, ESLint, Prettier, npm, VS Code
+### 1. FounderHub – Startup Directory Web App
+Built a YC-style startup directory using **Next.js**, **Tailwind CSS**, and **Auth.js**. Deployed on Vercel with responsive design, dynamic routing, and real-time founder profile management.
 
-Version Control: Git, GitHub
+### 2. Coffee Shop (Full-Stack E-commerce)
+Developed a full-stack e-commerce site using **React** and **Express.js**. Features include a product cart, user authentication, checkout, and dynamic menu. Utilized React Router and Context API.
 
-AI Integration: Experience in incorporating AI solutions into projects
+### 3. AI Recipe Generator (Powered by Mistral AI)
+Built a recipe-generating app using **React** and **Mistral AI** (via Hugging Face). UI created with **Material UI** and enhanced with third-party libraries.
 
-Testing: Jasmine for unit testing
+### 4. Portfolio Website
+Personal portfolio built with **React** and **Framer Motion**, featuring responsive design and modern UI/UX to showcase projects and experience.
 
-Certifications:
+---
 
-Frontend Developer (React) – HackerRank
+## Leadership & Volunteering
 
-React Certificate – HackerRank
+- **Leader**, Indonesian Student Association (Lucknow Chapter): Led cultural events and networking meetups.  
+- **International Student Delegate**, G20 Summit (Kashmir & Lucknow): Represented Indonesian students and participated in international workshops.
 
-JavaScript Algorithms and Data Structures – freeCodeCamp
+---
 
-Responsive Web Design – freeCodeCamp
+## Languages
 
-JavaScript Certificate – HackerRank
+- **English:** Fluent  
+- **Indonesian:** Native
 
-CSS Certificate – HackerRank
+---
 
-SQL Certificate – HackerRank
+## Interests
 
-Projects:
+- **Web Development** – Building dynamic, user-friendly applications  
+- **Artificial Intelligence** – Exploring AI integration  
+- **Technology & Innovation** – Staying updated with new trends  
+- **Open Source & Collaboration** – Contributing to developer communities
 
-AI Recipe Generator (Powered by Mistral AI): React.js app that generates recipes based on user-provided ingredients using Mistral AI.
-
-Coffee Shop (E-commerce website): Full-stack website built using React.js for frontend and Express.js for backend.
-
-Clothing Store (E-commerce platform): React.js-based website with state management and payment features.
-
-E-commerce (Amazon Clone): Fully responsive e-commerce platform with product listings, cart, and order management.
-
-Portfolio Website: Personal website to showcase skills and projects.
-
-Web Applications & Games: Interactive apps and games, such as Weather App, To-do List, Calculator, Rock-Paper-Scissors, etc.
-
-Leadership & Volunteering:
-
-Leader, Indonesian Student Association (Lucknow Chapter): Led cultural events and networking meetups.
-
-International Student Delegate, G20 Summit (Kashmir & Lucknow): Represented Indonesian students, participated in workshops, and advocated for international cooperation.
-
-Languages:
-
-English: Fluent
-
-Indonesian: Native
-
-Interests:
-
-Web Development: Passion for building user-friendly, dynamic websites and apps.
-
-Artificial Intelligence: Exploring AI integration in software development.
-
-Technology & Innovation: Staying updated with emerging trends in software development and tech.
-
-Open Source & Collaboration: Engaging with developer communities and contributing to projects.
 `;
     const scrapedContent = await scrapeWebsite(websiteURL);
     const { textContent: websiteTextContent } = scrapedContent;
