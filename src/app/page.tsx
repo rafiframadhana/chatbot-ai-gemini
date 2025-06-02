@@ -74,11 +74,12 @@ const ChatInterface = () => {
 
   const suggestedMessages = [
     "Tell me about yourself.",
-    "Tell me about your skills.",
     "What projects have you worked on?",
+    "Tell me about your skills.",
+    "What is your work experience?",
+    "What is your education background?",
     "What are your interests?",
     "Where are you located?",
-    "What is your work experience?",
   ];
 
   const handleSuggestedMessageClick = async (message: string) => {
@@ -346,7 +347,7 @@ const ChatInterface = () => {
               variant="ghost"
               size="icon"
               onClick={() => scrollSuggestedMessages("left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+              className="hidden sm:flex absolute left-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
               style={{ marginLeft: "4px" }}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -374,7 +375,7 @@ const ChatInterface = () => {
               variant="ghost"
               size="icon"
               onClick={() => scrollSuggestedMessages("right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+              className="hidden sm:flex absolute right-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
               style={{ marginRight: "4px" }}
             >
               <ChevronRight className="h-4 w-4" />
