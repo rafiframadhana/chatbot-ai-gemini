@@ -48,7 +48,9 @@ const ChatInterface = () => {
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const suggestedMessagesContainerRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
-  const [animatedMessageIds, setAnimatedMessageIds] = useState(new Set<string>());
+  const [animatedMessageIds, setAnimatedMessageIds] = useState(
+    new Set<string>()
+  );
 
   const clearMessages = () => {
     setMessages([]);
@@ -177,8 +179,17 @@ const ChatInterface = () => {
       if (!content) return null;
       return <p className="text-[16px] mb-3 last:mb-0" {...props} />;
     },
-    ul: ({ node, ...props }: { node?: any; [key: string]: any }) => <ul className="mb-3 text-[16px]" {...props} />,
-    li: ({ node, children, ...props }: { node?: any; children?: React.ReactNode }) => (
+    ul: ({ node, ...props }: { node?: any; [key: string]: any }) => (
+      <ul className="mb-3 text-[16px]" {...props} />
+    ),
+    li: ({
+      node,
+      children,
+      ...props
+    }: {
+      node?: any;
+      children?: React.ReactNode;
+    }) => (
       <li className="text-[16px] flex items-start gap-2 mb-1" {...props}>
         <span className="select-none mt-[2px]">•</span>
         <span>{children}</span>
@@ -187,8 +198,19 @@ const ChatInterface = () => {
     h2: ({ node, ...props }: { node?: any; [key: string]: any }) => (
       <h2 className="text-[16px] font-semibold" {...props} />
     ),
-    h3: ({ node, ...props }: { node?: any; [key: string]: any }) => <h3 className="text-[16px]" {...props} />,
-    a: ({ node, href, children, ...props }: { node?: any; href?: string; children?: React.ReactNode }) => {
+    h3: ({ node, ...props }: { node?: any; [key: string]: any }) => (
+      <h3 className="text-[16px]" {...props} />
+    ),
+    a: ({
+      node,
+      href,
+      children,
+      ...props
+    }: {
+      node?: any;
+      href?: string;
+      children?: React.ReactNode;
+    }) => {
       if (!href) return null;
       return (
         <a
@@ -244,11 +266,12 @@ const ChatInterface = () => {
         {formatMessage(message.content || "")}
       </ReactMarkdown>
     );
-  };  return (
-    <div className="fixed inset-0 w-screen h-screen flex flex-col">
-      <Toaster />
-      <Card className="w-full h-full overflow-hidden bg-black text-white border-0">
-        <CardContent className="p-0 flex flex-col h-full">
+  };
+  return (
+    <div className="fixed inset-0 flex flex-col bg-black">
+      <Toaster />{" "}
+      <Card className="w-full flex-1 bg-black text-white border-0 overflow-hidden">
+        <CardContent className="p-0 flex flex-col h-full overflow-hidden">
           {/* Header */}
           <div className="border-b border-gray-700 p-4 flex items-center justify-between bg-zinc-900">
             <div className="flex items-center space-x-4">
@@ -261,8 +284,16 @@ const ChatInterface = () => {
                   <AvatarFallback>RR</AvatarFallback>
                 </Avatar>
                 <span className="absolute bottom-[2px] right-[-2px] flex h-[12px] w-[12px]">
-                  <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${hasError ? 'bg-red-400' : 'bg-green-400'} opacity-75`}></span>
-                  <span className={`relative inline-flex rounded-full h-[12px] w-[12px] ${hasError ? 'bg-red-500' : 'bg-green-500'} border-2 border-black shadow-md`}></span>
+                  <span
+                    className={`absolute inline-flex h-full w-full animate-ping rounded-full ${
+                      hasError ? "bg-red-400" : "bg-green-400"
+                    } opacity-75`}
+                  ></span>
+                  <span
+                    className={`relative inline-flex rounded-full h-[12px] w-[12px] ${
+                      hasError ? "bg-red-500" : "bg-green-500"
+                    } border-2 border-black shadow-md`}
+                  ></span>
                 </span>
               </div>
               <div>
@@ -271,17 +302,16 @@ const ChatInterface = () => {
             </div>
             <div className="flex items-center">
               <Tooltip title="New Chat" arrow>
-                <button onClick={clearMessages} className="text-white">
+                <button onClick={clearMessages} className="text-white mr-2">
                   <AddCommentIcon sx={{ fontSize: 23 }} />
                 </button>
               </Tooltip>
             </div>
-          </div>
-
-          {/* Chat Messages */}
+          </div>{" "}
+          {/* Chat Messages */}{" "}
           <ScrollArea
             ref={chatWindowRef}
-            className="flex-grow px-4 pt-4 space-y-0 bg-black overflow-y-auto scrollbar-hide"
+            className="flex-1 min-h-0 px-4 pt-4 bg-black scrollbar-hide"
           >
             {messages.map((message, index) => (
               <div
@@ -304,15 +334,14 @@ const ChatInterface = () => {
               </div>
             ))}
             {isLoading && (
-              <div className="mt-1 mb-[210px] text-gray-400 flex items-center justify-start">
+              <div className="mt-1 mb-4 text-gray-400 flex items-center justify-start">
                 <Icons.spinner className="animate-spin mr-2 h-4 w-4 inline-block text-white" />
                 Generating response...
               </div>
             )}
           </ScrollArea>
-
-          {/* Suggested Messages */}
-          <div className="p-4 border-t border-gray-700 relative group">
+          {/* Suggested Messages */}{" "}
+          <div className="shrink-0 p-4 border-t border-gray-700 relative group">
             <Button
               variant="ghost"
               size="icon"
@@ -351,16 +380,17 @@ const ChatInterface = () => {
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
-
-          {/* Input Area */}
-          <div className="p-4 flex items-center space-x-2 border-t border-gray-700 bg-zinc-900">
+          {/* Input Area */}{" "}
+          <div className="shrink-0 p-4 flex items-center space-x-2 border-t border-gray-700 bg-zinc-900">
             <Input
               type="text"
               placeholder="Ask me anything..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="flex-grow rounded-lg bg-gray-800 text-white border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
-              onKeyDown={(e) => e.key === "Enter" && !isLoading && !isTyping && sendMessage()}
+              onKeyDown={(e) =>
+                e.key === "Enter" && !isLoading && !isTyping && sendMessage()
+              }
               disabled={isLoading || isTyping}
             />
             <Button
