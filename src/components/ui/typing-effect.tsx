@@ -26,42 +26,39 @@ export function TypingEffect({
   const [isComplete, setIsComplete] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const typeNextCharacter = useCallback((currentIndex: number) => {
-    if (currentIndex >= text.length) {
-      setIsComplete(true);
-      onComplete?.();
-      return;
-    }
+  const typeNextChunk = useCallback((currentIndex: number) => {
+  if (currentIndex >= text.length) {
+    setIsComplete(true);
+    onComplete?.();
+    return;
+  }
 
-    // Get the next character
-    const nextChar = text[currentIndex];
-    
-    // Calculate delay based on character type
-    let delay = speed;
-    
-    // Faster for spaces and punctuation
-    if (nextChar === ' ') delay = speed * 0.5;
-    else if ([',', '.', '!', '?'].includes(nextChar)) delay = speed * 1.5;
-    // Slower for new lines and code blocks
-    else if (nextChar === '\n') delay = speed * 2;
-    else delay = getRandomTypingDelay(speed * 0.8, speed * 1.2);
+  // Define chunk size — how many characters to reveal each tick
+  const chunkSize = 3;
 
-    timeoutRef.current = setTimeout(() => {
-      setDisplayedText(text.substring(0, currentIndex + 1));
-      typeNextCharacter(currentIndex + 1);
-    }, delay);
-  }, [text, speed, onComplete]);
-  useEffect(() => {
-    setDisplayedText('');
-    setIsComplete(false);
-    typeNextCharacter(0);
+  // Calculate next index, not to exceed text length
+  const nextIndex = Math.min(currentIndex + chunkSize, text.length);
 
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, [text, typeNextCharacter]);
+  // Fixed delay between chunks, still respecting speed prop
+  // (You can adjust multiplier for feel)
+  const delay = speed * 0.5;
+
+  timeoutRef.current = setTimeout(() => {
+    setDisplayedText(text.substring(0, nextIndex));
+    typeNextChunk(nextIndex);
+  }, delay);
+}, [text, speed, onComplete]);
+
+useEffect(() => {
+  setDisplayedText('');
+  setIsComplete(false);
+  typeNextChunk(0);
+
+  return () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  };
+}, [text, typeNextChunk]);
+
 
   const markdownComponents = {
     code({ node, inline, className, children, ...props }: any) {
