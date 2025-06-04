@@ -2,7 +2,7 @@
 
 A modern, responsive chat interface built with Next.js and Google's Gemini AI. Features a beautiful UI with typing animations, code snippet support, and mobile responsiveness.
 
-![AI Chat Interface](https://rafiframadhana.site/assets/ai-chatbot-C83HSFrn.png)
+![AI Chat Interface](https://i.imgur.com/F5UdNzE.png)
 
 ## Features
 
