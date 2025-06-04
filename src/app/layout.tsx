@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'AI Chatbot | RR',
-  description: "AI chatbot to help user get to know about Rafif's better",
+  title: "Rafif's AI",
+  description: "An AI chatbot to help users get to know Rafif better.",
 };
 
 export default function RootLayout({
