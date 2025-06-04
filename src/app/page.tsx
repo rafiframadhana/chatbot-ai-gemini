@@ -305,7 +305,7 @@ const ChatInterface = () => {
                 </span>
               </div>
               <div>
-                <h5 className="font-semibold text-center">Rafif's AI</h5>
+                <h5 className="font-semibold text-center">Rafif</h5>
               </div>
             </div>
             <div className="flex items-center">
