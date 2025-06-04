@@ -336,7 +336,7 @@ const ChatInterface = () => {
                     </Avatar>
                   </div>
                 )}                <div
-                  className={`px-4 py-3 sm:px-5 sm:py-4 max-w-[95%] sm:max-w-[85%] rounded-xl shadow-md mb-4 overflow-hidden ${
+                  className={`px-4 py-3 sm:px-5 sm:py-4 max-w-[85%] sm:max-w-[85%] rounded-xl shadow-md mb-4 overflow-hidden ${
                     message.role === "user"
                       ? "bg-blue-600 text-gray-100 rounded-[20px] rounded-r last:rounded-tr first:rounded-tr-[20px] only:rounded-tr-[20px] first:rounded-br only:rounded-br last:rounded-br-[20px]"
                       : "bg-gray-800 text-gray-100 rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px]"
