@@ -2,7 +2,7 @@
 
 A modern, responsive chat interface built with Next.js and Google's Gemini AI. Features a beautiful UI with typing animations, code snippet support, and mobile responsiveness.
 
-![AI Chat Interface](https://avatars.githubusercontent.com/rafiframadhana)
+![AI Chat Interface](https://rafiframadhana.site/assets/ai-chatbot-C83HSFrn.png)
 
 ## Features
 
@@ -13,7 +13,7 @@ A modern, responsive chat interface built with Next.js and Google's Gemini AI. F
 - 🎨 Modern UI with Tailwind CSS
 - 🔄 Real-time chat interactions
 - 💬 Suggested messages for quick interactions
-- 🚀 Built with Next.js 14 and TypeScript
+- 🚀 Built with Next.js 15 and TypeScript
 
 ## Tech Stack
 
@@ -32,7 +32,7 @@ A modern, responsive chat interface built with Next.js and Google's Gemini AI. F
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/rafiframadhana/chatbot-ai-gemini]
+git clone https://github.com/rafiframadhana/chatbot-ai-gemini
 cd chatbot-ai-gemini
 ```
 
@@ -76,16 +76,6 @@ src/
 - **Suggested Messages:** Quick action buttons for common queries
 - **Markdown Support:** Rich text formatting in messages
 
-## Contributing
-
-Feel free to contribute to this project:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -94,3 +84,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Rafif Ramadhana
 - GitHub: [@rafiframadhana](https://github.com/rafiframadhana)
+- Portfolio: [rafiframadhana.site](https://rafiframadhana.site)
