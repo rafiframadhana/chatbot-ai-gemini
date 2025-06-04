@@ -172,12 +172,23 @@ const ChatInterface = () => {
       setIsLoading(false);
     }
   };
-
   const markdownComponents = {
     p: ({ node, ...props }: { node?: any; [key: string]: any }) => {
       const content = props.children?.toString()?.trim();
       if (!content) return null;
-      return <p className="text-[16px] mb-3 last:mb-0" {...props} />;
+      return <p className="text-[16px] mb-3 last:mb-0 break-words" {...props} />;
+    },    pre: ({ node, ...props }: { node?: any; [key: string]: any }) => (
+      <div className="relative rounded-md">
+        <pre className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pr-2" {...props} />
+      </div>
+    ),
+    code: ({ node, inline, ...props }: { node?: any; inline?: boolean; [key: string]: any }) => {
+      if (inline) {
+        return <code className="bg-black/30 rounded px-1 py-0.5 text-xs sm:text-sm" {...props} />;
+      }
+      return (
+        <code className="block w-full font-mono text-xs sm:text-sm break-all whitespace-pre-wrap" {...props} />
+      );
     },
     ul: ({ node, ...props }: { node?: any; [key: string]: any }) => (
       <ul className="mb-3 text-[16px]" {...props} />
@@ -324,15 +335,14 @@ const ChatInterface = () => {
                       <AvatarFallback>RR</AvatarFallback>
                     </Avatar>
                   </div>
-                )}
-                <div
-                  className={`px-5 py-4 max-w-[85%] rounded-xl shadow-md mb-4 ${
+                )}                <div
+                  className={`px-4 py-3 sm:px-5 sm:py-4 max-w-[95%] sm:max-w-[85%] rounded-xl shadow-md mb-4 overflow-hidden ${
                     message.role === "user"
                       ? "bg-blue-600 text-gray-100 rounded-[20px] rounded-r last:rounded-tr first:rounded-tr-[20px] only:rounded-tr-[20px] first:rounded-br only:rounded-br last:rounded-br-[20px]"
                       : "bg-gray-800 text-gray-100 rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px]"
                   }`}
                 >
-                  <div className="markdown-message text-[16px] leading-relaxed">
+                  <div className="markdown-message text-[14px] sm:text-[16px] leading-relaxed [&_pre]:overflow-x-auto [&_pre]:w-[calc(100vw-120px)] sm:[&_pre]:w-full [&_pre]:max-w-full [&_pre]:p-2 sm:[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:bg-black/50 [&_pre]:my-2 [&_pre_code]:text-xs sm:[&_pre_code]:text-sm">
                     <MessageContent message={message} />
                   </div>
                 </div>
