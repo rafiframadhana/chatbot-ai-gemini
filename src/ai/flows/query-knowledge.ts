@@ -217,11 +217,15 @@ Link: [FounderHub Project](https://founder-hub.vercel.app/)
 Developed a full-stack e-commerce site using **React** and **Express.js**. Features include a product cart, user authentication, checkout, and dynamic menu. Utilized React Router and Context API.
 Link: [Coffee Shop Project](https://coffeeculture-id.netlify.app/)
 
-### 3. AI Recipe Generator (Powered by Mistral AI)
+### 3. AI Chatbot
+Built a modern, responsive chat interface with **Next.js** and **Google's Gemini AI** that helps users learn more about me by answering questions about my portfolio. Features a beautiful UI with typing animations, code snippet support, and mobile responsiveness.
+Link: [AI Chatbot](https://rafif-ai.vercel.app/)
+
+### 4. AI Recipe Generator (Powered by Mistral AI)
 Built a recipe-generating app using **React** and **Mistral AI** (via Hugging Face). UI created with **Material UI** and enhanced with third-party libraries.
 Link: [AI Recipe Generator Project](https://recipebot-ai.netlify.app/)
 
-### 4. Portfolio Website
+### 5. Portfolio Website
 Personal portfolio built with **React** and **Framer Motion**, featuring responsive design and modern UI/UX to showcase projects and experience.
 Link: [Portfolio Website Project](https://rafiframadhana.site/)
 
