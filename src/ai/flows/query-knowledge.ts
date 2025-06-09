@@ -11,12 +11,12 @@
 import { ai } from "@/ai/ai-instance";
 import { scrapeWebsite } from "@/services/web-scraper";
 import { z } from "genkit";
-import fs from 'fs';
-import path from 'path';
+// import fs from 'fs';
+// import path from 'path';
 
 
-const filePath = path.join(process.cwd(), '/public/data.txt');
-const dataInfo = fs.readFileSync(filePath, 'utf8');
+// const filePath = path.join(process.cwd(), '/public/data.txt');
+// const dataInfo = fs.readFileSync(filePath, 'utf8');
 
 const AskQuestionInputSchema = z.object({
   question: z.string().describe("The question to ask."),
@@ -167,104 +167,70 @@ const askQuestionFlow = ai.defineFlow<
   async (input) => {
     const { question } = input;
     const websiteURL = "https://rafiframadhana.site/";
-    const fileContent = dataInfo;
-//     const fileContent = `
-// Personal Information:
+    // const fileContent = dataInfo;
+    const fileContent = `
+Personal Information:
 
-// **Name**: Rafif Ramadhana
-// **Location:** Aceh, Indonesia  
-// **Mobile/WhatsApp:** +6281292545497  
-// **Email:** [rafiframadhana.cs@gmail.com](mailto:rafiframadhana.cs@gmail.com)  
-// **LinkedIn:** [linkedin.com/in/rafif-ramadhana](https://www.linkedin.com/in/rafif-ramadhana/)  
-// **GitHub:** [github.com/rafiframadhana](https://github.com/rafiframadhana)
+- Name: Rafif Ramadhana
+- Location: Aceh, Indonesia
+- Mobile: +6281292545497
+- Email: rafiframadhana.cs@gmail.com
+- LinkedIn: https://www.linkedin.com/in/rafif-ramadhana-230603250/
+- GitHub: https://github.com/rafiframadhana
+- Profile Summary: Recent Bachelor of Science in Computer Science graduate from the University of Lucknow with a strong foundation in software engineering. Skilled in full-stack web development using **MERN stack** (MongoDB, Express.js, React, Node.js) and **Next.js**. Experienced in building responsive web applications, e-commerce platforms, and AI-powered projects. Familiar with SQL and NoSQL databases, and experienced in deploying apps with Vercel, Netlify, and Railway.
 
-// ---
+Education:
 
-// ## Profile Summary
+- Degree: Bachelor of Science in Computer Science
+- University: University of Lucknow, India
+- Scholarship: ICCR Scholarship Program
+- Capstone Project: Developed a responsive e-commerce website with interactive features.
 
-// Recent Bachelor of Science in Computer Science graduate from the University of Lucknow with a strong foundation in software engineering. Skilled in full-stack web development using **MERN stack** (MongoDB, Express.js, React, Node.js) and **Next.js**. Experienced in building responsive web applications, e-commerce platforms, and AI-powered projects. Familiar with SQL and NoSQL databases, and experienced in deploying apps with Vercel, Netlify, and Railway.
+Skills:
 
-// ---
+- Programming Languages: JavaScript, TypeScript, HTML, CSS
+- Frontend: Next.js, React, Redux Toolkit, Zustand, React Router, Tailwind CSS, MUI, Chakra UI, shadcn
+- Backend: Node.js, Express.js 
+- Databases: MongoDB (NoSQL), MySQL (SQL)
+- Testing & Code Quality: Jest, Jasmine, ESLint, Prettier
+- Tools & Deployment: Git, GitHub, Vercel, Netlify, GitHub Pages, Railway, Vite, npm, VS Code
+- Other Skills: REST API (Axios, Fetch), Figma to Code, Responsive Design, AI Integration
 
-// ## Education
+Certifications:
 
-// - **Degree:** Bachelor of Science in Computer Science  
-// - **University:** University of Lucknow, India  
-// - **Scholarship:** ICCR Scholarship Program  
-// - **Capstone Project:** Developed a responsive e-commerce website with interactive features.
+- Frontend Developer (React) – HackerRank
+- React Certificate – HackerRank
+- JavaScript Algorithms and Data Structures – freeCodeCamp
+- Responsive Web Design – freeCodeCamp
+- JavaScript Certificate – HackerRank
+- CSS Certificate – HackerRank
+- SQL Certificate – HackerRank
 
-// ---
+Top Projects:
 
-// ## Skills
+- FounderHub – Startup Directory Web App: Built a YC-style startup directory using Next.js, Tailwind CSS, and Auth.js. Deployed on Vercel with responsive design, dynamic routing, and real-time founder profile management. Link: https://founder-hub.vercel.app/
+- Coffee Shop (Full-Stack E-commerce): Developed a full-stack e-commerce site using React and Express.js. Features include a product cart, user authentication, checkout, and dynamic menu. Utilized React Router and Context API. Link: https://coffeeculture-id.netlify.app/
+- AI Chatbot: Built a modern, responsive chat interface with Next.js and Google's Gemini AI that helps users learn more about me by answering questions about my portfolio. Features a beautiful UI with typing animations, code snippet support, and mobile responsiveness. Link: https://rafif-ai.vercel.app/
+- AI Recipe Generator (Powered by Mistral AI): Built a recipe-generating app using React and Mistral AI (via Hugging Face). UI created with Material UI and enhanced with third-party libraries. Link: https://recipebot-ai.netlify.app/
+- Portfolio Website: Personal portfolio built with React and Framer Motion, featuring responsive design and modern UI/UX to showcase projects and experience. Link: https://rafiframadhana.site/
 
-// - **Programming Languages:** JavaScript, TypeScript, HTML, CSS  
-// - **Frontend:** Next.js, React, Redux Toolkit, Zustand, React Router, Tailwind CSS, MUI, Chakra UI, shadcn  
-// - **Backend:** Node.js, Express.js  
-// - **Databases:** MongoDB (NoSQL), MySQL (SQL)  
-// - **Testing & Code Quality:** Jest, Jasmine, ESLint, Prettier  
-// - **Tools & Deployment:** Git, GitHub, Vercel, Netlify, GitHub Pages, Railway, Vite, npm, VS Code  
-// - **Other Skills:** REST API (Axios, Fetch), Figma to Code, Responsive Design, AI Integration
+Languages:
 
-// ---
+- English: Fluent
+- Indonesian: Native
 
-// ## Certifications
+Interests:
+- Web Development: Passion for building user-friendly, dynamic websites and apps.
+- Artificial Intelligence: Exploring AI integration in software development.
+- Technology & Innovation: Staying updated with emerging trends in software development and tech.
+- Open Source & Collaboration: Engaging with developer communities and contributing to projects.
 
-// 1. Frontend Developer (React) – HackerRank  
-// 2. React Certificate – HackerRank  
-// 3. JavaScript Algorithms and Data Structures – freeCodeCamp  
-// 4. Responsive Web Design – freeCodeCamp  
-// 5. JavaScript Certificate – HackerRank  
-// 6. CSS Certificate – HackerRank  
-// 7. SQL Certificate – HackerRank
+Leadership & Volunteering
 
-// ---
+- Leader, Indonesian Student Association (Lucknow Chapter): Led cultural events and networking meetups.  
+- International Student Delegate, G20 Summit (Kashmir & Lucknow): Represented Indonesian students and participated in international workshops.
 
-// ## Top Projects
-
-// 1. FounderHub – Startup Directory Web App:
-// - Built a YC-style startup directory using **Next.js**, **Tailwind CSS**, and **Auth.js**. Deployed on Vercel with responsive design, dynamic routing, and real-time founder profile management.
-// - Link: https://founder-hub.vercel.app/
-
-// 2. Coffee Shop (Full-Stack E-commerce):
-// - Developed a full-stack e-commerce site using **React** and **Express.js**. Features include a product cart, user authentication, checkout, and dynamic menu. Utilized React Router and Context API.
-// - Link: https://coffeeculture-id.netlify.app/
-
-// 3. AI Chatbot:
-// - Built a modern, responsive chat interface with **Next.js** and **Google's Gemini AI** that helps users learn more about me by answering questions about my portfolio. Features a beautiful UI with typing animations, code snippet support, and mobile responsiveness.
-// - Link: https://rafif-ai.vercel.app/
-
-// 4. AI Recipe Generator (Powered by Mistral AI):
-// - Built a recipe-generating app using **React** and **Mistral AI** (via Hugging Face). UI created with **Material UI** and enhanced with third-party libraries.
-// - Link: https://recipebot-ai.netlify.app/
-
-// 5. Portfolio Website:
-// - Personal portfolio built with **React** and **Framer Motion**, featuring responsive design and modern UI/UX to showcase projects and experience.
-// - Link: https://rafiframadhana.site/
-
-// ---
-
-// ## Leadership & Volunteering
-
-// - **Leader**, Indonesian Student Association (Lucknow Chapter): Led cultural events and networking meetups.  
-// - **International Student Delegate**, G20 Summit (Kashmir & Lucknow): Represented Indonesian students and participated in international workshops.
-
-// ---
-
-// ## Languages
-
-// - **English:** Fluent  
-// - **Indonesian:** Native
-
-// ---
-
-// ## Interests
-
-// - **Web Development** – Building dynamic, user-friendly applications  
-// - **Artificial Intelligence** – Exploring AI integration  
-// - **Technology & Innovation** – Staying updated with new trends  
-// - **Open Source & Collaboration** – Contributing to developer communities
-
-// `;
+`;
     const scrapedContent = await scrapeWebsite(websiteURL);
     const { textContent: websiteTextContent } = scrapedContent;
 
