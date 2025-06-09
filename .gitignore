@@ -39,11 +39,7 @@ yarn-error.log*
 next-env.d.ts
 
 # IDE and editor files
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode/
 .idea/
 *.swp
 *.swo

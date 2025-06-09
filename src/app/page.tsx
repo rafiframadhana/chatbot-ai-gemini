@@ -49,7 +49,7 @@ const ChatInterface = () => {
   const [animatedMessageIds, setAnimatedMessageIds] = useState(
     new Set<string>()
   );
-  const imageUrl = "https://avatars.githubusercontent.com/rafiframadhana";
+  const imageUrl = "https://i.imgur.com/dZTdQf8.jpeg";
 
   const clearMessages = () => {
     setMessages([]);
@@ -184,7 +184,7 @@ const ChatInterface = () => {
     ),
     code: ({ node, inline, ...props }: { node?: any; inline?: boolean; [key: string]: any }) => {
       if (inline) {
-        return <code className="bg-black/30 rounded px-1 py-0.5 text-xs sm:text-sm" {...props} />;
+        return <code className="bg-black/30 rounded px-1 py-0.5 text-[16px]" {...props} />;
       }
       return (
         <code className="block w-full font-mono text-xs sm:text-sm break-all whitespace-pre-wrap" {...props} />
@@ -228,7 +228,7 @@ const ChatInterface = () => {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 underline hover:text-blue-600"
+          className="text-cyan-500 underline hover:text-blue-500"
           {...props}
         >
           {children}
@@ -238,12 +238,14 @@ const ChatInterface = () => {
   };
 
   const formatMessage = (content: string) => {
-    return content
-      .trim()
-      .replace(/\n{3,}/g, "\n\n")
-      .replace(/\n\s+/g, "\n")
-      .replace(/^[-*]\s/gm, "• ");
-  };
+  return content
+    .trim()                                         // Remove leading/trailing whitespace
+    .replace(/\r\n/g, "\n")                         // Normalize Windows-style line endings to Unix
+    .replace(/\n{3,}/g, "\n\n")                     // Collapse 3+ newlines into 2 (for readability)
+    .replace(/^([ \t]*)[-*]\s+/gm, "$1• ")          // Replace list dashes/stars with bullets, keep indentation
+    .replace(/[ \t]+$/gm, "");                      // Remove trailing spaces on each line
+};
+
   const MessageContent = ({ message }: { message: Message }) => {
     const isLatestAssistantMessage =
       message.role === "assistant" &&
@@ -339,10 +341,10 @@ const ChatInterface = () => {
                   className={`px-4 py-3 sm:px-5 sm:py-4 max-w-[85%] sm:max-w-[85%] rounded-xl shadow-md mb-4 overflow-hidden ${
                     message.role === "user"
                       ? "bg-blue-600 text-gray-100 rounded-[20px] rounded-r last:rounded-tr first:rounded-tr-[20px] only:rounded-tr-[20px] first:rounded-br only:rounded-br last:rounded-br-[20px]"
-                      : "bg-gray-800 text-gray-100 rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px]"
+                      : "bg-gray-800 text-gray-200 rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px]"
                   }`}
                 >
-                  <div className="markdown-message text-[14px] sm:text-[16px] leading-relaxed [&_pre]:overflow-x-auto [&_pre]:w-[calc(100vw-120px)] sm:[&_pre]:w-full [&_pre]:max-w-full [&_pre]:p-2 sm:[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:bg-black/50 [&_pre]:my-2 [&_pre_code]:text-xs sm:[&_pre_code]:text-sm">
+                  <div className="markdown-message text-[14px] sm:text-[16px] leading-relaxed [&_pre]:overflow-x-auto [&_pre]:w-[calc(100vw-120px)] sm:[&_pre]:w-full [&_pre]:max-w-full [&_pre]:p-2 sm:[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:bg-black/50 [&_pre]:my-2 [&_pre_code]:text-[14px] sm:[&_pre_code]:text-[14px]">
                     <MessageContent message={message} />
                   </div>
                 </div>
