@@ -135,7 +135,7 @@ Personal Information:
 - Location: Aceh, Indonesia
 - Mobile: +6281292545497
 - Email: rafiframadhana.cs@gmail.com
-- LinkedIn: https://www.linkedin.com/in/rafif-ramadhana-230603250/
+- LinkedIn: https://www.linkedin.com/in/rafif-ramadhana
 - GitHub: https://github.com/rafiframadhana
 - Profile Summary: Recent Bachelor of Science in Computer Science graduate from the University of Lucknow with a strong foundation in software engineering. Skilled in full-stack web development using **MERN stack** (MongoDB, Express.js, React, Node.js) and **Next.js**. Experienced in building responsive web applications, e-commerce platforms, and AI-powered projects. Familiar with SQL and NoSQL databases, and experienced in deploying apps with Vercel, Netlify, and Railway.
 
