@@ -92,7 +92,13 @@ const ChatInterface = () => {
     // Scroll to bottom when user clicks a suggested message
     setTimeout(scrollToBottom, 100);
     try {
-      const aiResponse = await askQuestion({ question: message });
+      const aiResponse = await askQuestion({
+        question: message,
+        history: messages
+          .slice(-10)
+          .map(({ role, content }) => ({ role, content })),
+      });
+
       const aiMessage: Message = {
         id: Date.now().toString(),
         role: "assistant",
@@ -152,7 +158,13 @@ const ChatInterface = () => {
     // Scroll to bottom when user sends a message
     setTimeout(scrollToBottom, 100);
     try {
-      const aiResponse = await askQuestion({ question: input });
+      const aiResponse = await askQuestion({
+        question: input,
+        history: messages
+          .slice(-10)
+          .map(({ role, content }) => ({ role, content })),
+      });
+
       const aiMessage = {
         id: Date.now().toString(),
         role: "assistant",
@@ -176,18 +188,40 @@ const ChatInterface = () => {
     p: ({ node, ...props }: { node?: any; [key: string]: any }) => {
       const content = props.children?.toString()?.trim();
       if (!content) return null;
-      return <p className="text-[16px] mb-3 last:mb-0 break-words" {...props} />;
-    },    pre: ({ node, ...props }: { node?: any; [key: string]: any }) => (
+      return (
+        <p className="text-[16px] mb-3 last:mb-0 break-words" {...props} />
+      );
+    },
+    pre: ({ node, ...props }: { node?: any; [key: string]: any }) => (
       <div className="relative rounded-md">
-        <pre className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pr-2" {...props} />
+        <pre
+          className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pr-2"
+          {...props}
+        />
       </div>
     ),
-    code: ({ node, inline, ...props }: { node?: any; inline?: boolean; [key: string]: any }) => {
+    code: ({
+      node,
+      inline,
+      ...props
+    }: {
+      node?: any;
+      inline?: boolean;
+      [key: string]: any;
+    }) => {
       if (inline) {
-        return <code className="bg-black/30 rounded px-1 py-0.5 text-[16px]" {...props} />;
+        return (
+          <code
+            className="bg-black/30 rounded px-1 py-0.5 text-[16px]"
+            {...props}
+          />
+        );
       }
       return (
-        <code className="block w-full font-mono text-xs sm:text-sm break-all whitespace-pre-wrap" {...props} />
+        <code
+          className="block w-full font-mono text-xs sm:text-sm break-all whitespace-pre-wrap"
+          {...props}
+        />
       );
     },
     ul: ({ node, ...props }: { node?: any; [key: string]: any }) => (
@@ -238,13 +272,13 @@ const ChatInterface = () => {
   };
 
   const formatMessage = (content: string) => {
-  return content
-    .trim()                                         // Remove leading/trailing whitespace
-    .replace(/\r\n/g, "\n")                         // Normalize Windows-style line endings to Unix
-    .replace(/\n{3,}/g, "\n\n")                     // Collapse 3+ newlines into 2 (for readability)
-    .replace(/^([ \t]*)[-*]\s+/gm, "$1• ")          // Replace list dashes/stars with bullets, keep indentation
-    .replace(/[ \t]+$/gm, "");                      // Remove trailing spaces on each line
-};
+    return content
+      .trim() // Remove leading/trailing whitespace
+      .replace(/\r\n/g, "\n") // Normalize Windows-style line endings to Unix
+      .replace(/\n{3,}/g, "\n\n") // Collapse 3+ newlines into 2 (for readability)
+      .replace(/^([ \t]*)[-*]\s+/gm, "$1• ") // Replace list dashes/stars with bullets, keep indentation
+      .replace(/[ \t]+$/gm, ""); // Remove trailing spaces on each line
+  };
 
   const MessageContent = ({ message }: { message: Message }) => {
     const isLatestAssistantMessage =
@@ -337,7 +371,8 @@ const ChatInterface = () => {
                       <AvatarFallback>RR</AvatarFallback>
                     </Avatar>
                   </div>
-                )}                <div
+                )}{" "}
+                <div
                   className={`px-4 py-3 sm:px-5 sm:py-4 max-w-[85%] sm:max-w-[85%] rounded-xl shadow-md mb-4 overflow-hidden ${
                     message.role === "user"
                       ? "bg-blue-600 text-gray-100 rounded-[20px] rounded-r last:rounded-tr first:rounded-tr-[20px] only:rounded-tr-[20px] first:rounded-br only:rounded-br last:rounded-br-[20px]"
