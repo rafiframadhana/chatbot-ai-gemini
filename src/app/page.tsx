@@ -77,7 +77,7 @@ const ChatInterface = () => {
     "Tell me about your skills.",
     "What is your work experience?",
     "What is your education background?",
-    "What are your interests?",
+    "How can i contact you?",
     "Where are you located?",
   ];
 

@@ -133,7 +133,6 @@ Personal Information:
 
 - Name: Rafif Ramadhana
 - Location: Aceh, Indonesia
-- Mobile: +6281292545497
 - Email: rafiframadhana.cs@gmail.com
 - LinkedIn: https://www.linkedin.com/in/rafif-ramadhana
 - GitHub: https://github.com/rafiframadhana
