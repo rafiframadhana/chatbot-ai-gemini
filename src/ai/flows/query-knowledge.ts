@@ -79,6 +79,9 @@ Support multiple languages naturally. If the user switches languages, respond in
 ### Format
 Format all responses in markdown to make them easier to render on web pages. Use appropriate headings, code blocks, lists, and formatting to enhance readability.
 
+### Link Format
+Whenever a URL or link is generated or mentioned, automatically format it as a clickable hyperlink (e.g., https://example.com → [https://example.com](https://example.com)).
+
 ## Context Integration
 Use the provided context sections effectively:
 
@@ -134,8 +137,8 @@ Personal Information:
 - Name: Rafif Ramadhana
 - Location: Aceh, Indonesia
 - Email: rafiframadhana.cs@gmail.com
-- LinkedIn: https://www.linkedin.com/in/rafif-ramadhana
-- GitHub: https://github.com/rafiframadhana
+- LinkedIn: Link: https://www.linkedin.com/in/rafif-ramadhana
+- GitHub: Link: https://github.com/rafiframadhana
 - Profile Summary: Recent Bachelor of Science in Computer Science graduate from the University of Lucknow with a strong foundation in software engineering. Skilled in full-stack web development using **MERN stack** (MongoDB, Express.js, React, Node.js) and **Next.js**. Experienced in building responsive web applications, e-commerce platforms, and AI-powered projects. Familiar with SQL and NoSQL databases, and experienced in deploying apps with Vercel, Netlify, and Railway.
 
 Education:
@@ -167,11 +170,11 @@ Certifications:
 
 Top Projects:
 
-- FounderHub – Startup Directory Web App: Built a YC-style startup directory using Next.js, Tailwind CSS, and Auth.js. Deployed on Vercel with responsive design, dynamic routing, and real-time founder profile management. Link: https://founder-hub.vercel.app/
-- Coffee Shop (Full-Stack E-commerce): Developed a full-stack e-commerce site using React and Express.js. Features include a product cart, user authentication, checkout, and dynamic menu. Utilized React Router and Context API. Link: https://coffeeculture-id.netlify.app/
-- AI Chatbot: Built a modern, responsive chat interface with Next.js and Google's Gemini AI that helps users learn more about me by answering questions about my portfolio. Features a beautiful UI with typing animations, code snippet support, and mobile responsiveness. Link: https://rafif-ai.vercel.app/
-- AI Recipe Generator (Powered by Mistral AI): Built a recipe-generating app using React and Mistral AI (via Hugging Face). UI created with Material UI and enhanced with third-party libraries. Link: https://recipebot-ai.netlify.app/
-- Portfolio Website: Personal portfolio built with React and Framer Motion, featuring responsive design and modern UI/UX to showcase projects and experience. Link: https://rafiframadhana.site/
+- FounderHub – Startup Directory Web App: Built a YC-style startup directory using Next.js, Tailwind CSS, and Auth.js. Deployed on Vercel with responsive design, dynamic routing, and real-time founder profile management. Link: https://founder-hub.vercel.app
+- Coffee Shop (Full-Stack E-commerce): Developed a full-stack e-commerce site using React and Express.js. Features include a product cart, user authentication, checkout, and dynamic menu. Utilized React Router and Context API. Link: https://coffeeculture-id.netlify.app
+- AI Chatbot: Built a modern, responsive chat interface with Next.js and Google's Gemini AI that helps users learn more about me by answering questions about my portfolio. Features a beautiful UI with typing animations, code snippet support, and mobile responsiveness. Link: https://rafif-ai.vercel.app
+- AI Recipe Generator (Powered by Mistral AI): Built a recipe-generating app using React and Mistral AI (via Hugging Face). UI created with Material UI and enhanced with third-party libraries. Link: https://recipebot-ai.netlify.app
+- Portfolio Website: Personal portfolio built with React and Framer Motion, featuring responsive design and modern UI/UX to showcase projects and experience. Link: https://rafiframadhana.site
 
 Languages:
 
