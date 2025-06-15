@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ChevronsUpDown, Circle, Copy, Edit, ExternalLink, File, HelpCircle, Home, Loader2, Mail, MessageSquare, Moon, Plus, PlusCircle, Search, Server, Settings, Share2, Shield, Sun, Trash, User, X, Workflow, SendHorizonal } from 'lucide-react';
+import { ArrowRight, Check, ChevronsUpDown, Circle, Copy, Edit, ExternalLink, File, HelpCircle, Home, Loader2, Mail, MessageSquare, Moon, Plus, PlusCircle, Search, Server, Settings, Share2, Shield, Sun, Trash, User, X, Workflow, SendHorizonal, Sparkles, RefreshCcw } from 'lucide-react';
 
 const Icons = {
   arrowRight: ArrowRight,
@@ -29,6 +29,8 @@ const Icons = {
   trash: Trash,
   user: User,
   send: SendHorizonal,
+  suggestion: Sparkles,
+  newChat: RefreshCcw
 };
 
 export { Icons };

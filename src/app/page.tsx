@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { askQuestion } from "@/ai/flows/query-knowledge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -15,7 +15,6 @@ import { TypingEffect } from "@/components/ui/typing-effect";
 import MarkdownToJSX from "markdown-to-jsx";
 import { ChevronDownIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import AddCommentIcon from "@mui/icons-material/AddComment";
 import Tooltip from "@mui/material/Tooltip";
 
 type Message = {
@@ -43,6 +42,7 @@ const ChatInterface = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [suggestedMessage, setSuggestedMessage] = useState(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const suggestedMessagesContainerRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
@@ -63,7 +63,7 @@ const ChatInterface = () => {
         const introMessage: Message = {
           id: Date.now().toString(),
           role: "assistant",
-          content: "Hi! Rafif's here. How can I help you?",
+          content: "Hi There! I am an AI version of Rafif. How can I help you today?",
         };
         setMessages([introMessage]);
       }
@@ -127,6 +127,11 @@ const ChatInterface = () => {
       container.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
+
+  const showSuggestedMessage = () => {
+    setSuggestedMessage(!suggestedMessage);
+  };
+
   const scrollToBottom = () => {
     if (chatWindowRef.current) {
       const viewport = chatWindowRef.current.querySelector(
@@ -320,7 +325,7 @@ const ChatInterface = () => {
       <Card className="w-full flex-1 bg-black text-white border-0 overflow-hidden">
         <CardContent className="p-0 flex flex-col h-full overflow-hidden">
           {/* Header */}
-          <div className="border-b border-gray-700 p-4 flex items-center justify-between bg-zinc-900">
+          <div className="p-4 flex items-center justify-between bg-zinc-900">
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <Avatar>
@@ -341,13 +346,22 @@ const ChatInterface = () => {
                 </span>
               </div>
               <div>
-                <h5 className="font-semibold text-center">Rafif</h5>
+                <div className="flex flex-col ">
+                  <h5 className="font-semibold text-white leading-tight">
+                    Rafif
+                  </h5>
+                  <span
+                    className="text-[14px] font-medium text-neutral-500"
+                  >
+                    {hasError ? "Offline" : "Online"}
+                  </span>
+                </div>
               </div>
             </div>
             <div className="flex items-center">
               <Tooltip title="New Chat" arrow>
-                <button onClick={clearMessages} className="text-white mr-2">
-                  <AddCommentIcon sx={{ fontSize: 23 }} />
+                <button onClick={clearMessages} className="text-white mr-2 hover:bg-gray-700 p-2 rounded-full">
+                  <Icons.newChat className="w-6 h-6" />
                 </button>
               </Tooltip>
             </div>
@@ -375,8 +389,8 @@ const ChatInterface = () => {
                 <div
                   className={`px-4 py-3 sm:px-5 sm:py-4 max-w-[85%] sm:max-w-[85%] rounded-xl shadow-md mb-4 overflow-hidden ${
                     message.role === "user"
-                      ? "bg-blue-600 text-gray-100 rounded-[20px] rounded-r last:rounded-tr first:rounded-tr-[20px] only:rounded-tr-[20px] first:rounded-br only:rounded-br last:rounded-br-[20px]"
-                      : "bg-gray-800 text-gray-200 rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px]"
+                      ? "bg-indigo-600 text-gray-100 rounded-[20px] rounded-r last:rounded-tr first:rounded-tr-[20px] only:rounded-tr-[20px] first:rounded-br only:rounded-br last:rounded-br-[20px] border-[1px] border-indigo-500"
+                      : "bg-zinc-900 text-gray-200 rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px]  border-[1px] border-zinc-800"
                   }`}
                 >
                   <div className="markdown-message text-[14px] sm:text-[16px] leading-relaxed [&_pre]:overflow-x-auto [&_pre]:w-[calc(100vw-120px)] sm:[&_pre]:w-full [&_pre]:max-w-full [&_pre]:p-2 sm:[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:bg-black/50 [&_pre]:my-2 [&_pre_code]:text-[14px] sm:[&_pre_code]:text-[14px]">
@@ -395,7 +409,7 @@ const ChatInterface = () => {
                   </Avatar>
                 </div>
 
-                <div className="px-5 py-4 max-w-[85%] shadow-md mb-4 bg-gray-800 text-white rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px]">
+                <div className="px-5 py-4 max-w-[85%] shadow-md mb-4 bg-zinc-900 text-white rounded-[20px] rounded-l only:rounded-[20px] last:rounded-bl first:rounded-bl-[20px] first:rounded-tl only:rounded-tl last:rounded-tl-[20px] border-[1px] border-zinc-800">
                   <div className="chat-loader"></div>
                 </div>
               </div>
@@ -410,69 +424,89 @@ const ChatInterface = () => {
             </button> */}
           </ScrollArea>
           {/* Suggested Messages */}{" "}
-          <div className="shrink-0 p-4 border-t border-gray-700 relative group">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => scrollSuggestedMessages("left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
-              style={{ marginLeft: "4px" }}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
+          {suggestedMessage && (
+            <div className="shrink-0 px-4 pt-3 pb-4 relative group bg-transparent">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => scrollSuggestedMessages("left")}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ marginLeft: "4px" }}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
 
-            <div
-              ref={suggestedMessagesContainerRef}
-              className="w-full overflow-x-auto scrollbar-hide"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              <div className="flex flex-row space-x-3 whitespace-nowrap">
-                {suggestedMessages.map((msg, idx) => (
-                  <span
-                    key={idx}
-                    onClick={() => handleSuggestedMessageClick(msg)}
-                    className="cursor-pointer bg-gray-700 px-4 py-2 rounded-full hover:bg-gray-600 transition text-sm text-white"
-                  >
-                    {msg}
-                  </span>
-                ))}
+              <div
+                ref={suggestedMessagesContainerRef}
+                className="w-full overflow-x-auto scrollbar-hide"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                <div className="flex flex-row space-x-3 whitespace-nowrap">
+                  {suggestedMessages.map((msg, idx) => (
+                    <span
+                      key={idx}
+                      onClick={() => {
+                        handleSuggestedMessageClick(msg);
+                        showSuggestedMessage();
+                      }}
+                      className="cursor-pointer bg-gray-700 px-4 py-2 rounded-full hover:bg-gray-600 transition text-sm text-white"
+                    >
+                      {msg}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => scrollSuggestedMessages("right")}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ marginRight: "4px" }}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
+          {/* Input Area */}{" "}
+          <div className="shrink-0 px-4 pb-6 flex items-center space-x-2 bg-transparent">
+            <div className="relative w-full">
+              <Input
+                type="text"
+                placeholder="Ask me anything..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) =>
+                  e.key === "Enter" && !isLoading && !isTyping && sendMessage()
+                }
+                disabled={isLoading || isTyping}
+                className="w-full h-12 pr-20 rounded-2xl bg-zinc-900 text-white border-zinc-800 disabled:opacity-80 disabled:cursor-not-allowed"
+              />
+
+              <div className="absolute inset-y-0 right-2 flex items-center">
+                {!input.trim() && !isLoading && (
+                  <Tooltip title="Suggested Message" arrow>
+                    <Button
+                      onClick={showSuggestedMessage}
+                      className="rounded-full w-10 bg-transparent hover:bg-gray-700 text-white disabled:opacity-50 disabled:cursor-not-allowed p-2"
+                    >
+                      <Icons.suggestion className="!h-5 !w-5" />
+                    </Button>
+                  </Tooltip>
+                )}
+                <Button
+                  onClick={sendMessage}
+                  className="rounded-full w-10 bg-transparent hover:bg-gray-700 text-white disabled:opacity-50 disabled:cursor-not-allowed p-2"
+                  disabled={isLoading || isTyping || !input.trim()}
+                >
+                  {isLoading ? (
+                    <Icons.loader className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <Icons.send className="h-5 w-5" />
+                  )}
+                </Button>
               </div>
             </div>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => scrollSuggestedMessages("right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-zinc-800/80 hover:bg-zinc-800 rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity"
-              style={{ marginRight: "4px" }}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-          {/* Input Area */}{" "}
-          <div className="shrink-0 p-4 flex items-center space-x-2 border-t border-gray-700 bg-zinc-900">
-            <Input
-              type="text"
-              placeholder="Ask me anything..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="flex-grow rounded-lg bg-gray-800 text-white border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
-              onKeyDown={(e) =>
-                e.key === "Enter" && !isLoading && !isTyping && sendMessage()
-              }
-              disabled={isLoading || isTyping}
-            />
-            <Button
-              onClick={sendMessage}
-              className="rounded-lg bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={isLoading || isTyping || !input.trim()}
-            >
-              {isLoading ? (
-                <Icons.loader className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Icons.send className="h-4 w-4" />
-              )}
-            </Button>
           </div>
         </CardContent>
       </Card>
