@@ -320,7 +320,7 @@ const ChatInterface = () => {
     );
   };
   return (
-    <div className="fixed inset-0 flex flex-col bg-black">
+    <div className="fixed inset-x-0 top-0 flex flex-col bg-black h-[100dvh] transition-all duration-300">
       <Toaster />{" "}
       <Card className="w-full flex-1 bg-black text-white border-0 overflow-hidden">
         <CardContent className="p-0 flex flex-col h-full overflow-hidden">
